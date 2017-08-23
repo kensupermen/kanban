@@ -1,5 +1,9 @@
-import Footer from './footer/footer';
+import Input from './input/input';
+import Kanban from './kanban/kanban';
+import TaskList from './taskList/taskList';
 
 export {
-  Footer
+  Input,
+  Kanban,
+  TaskList
 };
