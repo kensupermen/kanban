@@ -1,2 +1,2 @@
-# kanban
+# Kanban
 Kanban Application used ReactJS
