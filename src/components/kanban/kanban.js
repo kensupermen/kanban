@@ -30,7 +30,7 @@ class Kanban extends Component {
             <hr />
             {
               this.state.todo.map(function(todoList) {
-                return <TaskList task={todoList}>TO DO:</TaskList>
+                return <TaskList task={todoList}></TaskList>
               })
             }
           </div>
@@ -40,7 +40,7 @@ class Kanban extends Component {
             <hr />
             {
               this.state.inProgress.map(function(inProgressList) {
-                return <TaskList task={inProgressList}>TO DO:</TaskList>
+                return <TaskList task={inProgressList}></TaskList>
               })
             }
           </div>
@@ -50,7 +50,7 @@ class Kanban extends Component {
             <hr />
             {
               this.state.done.map(function(doneList) {
-                return <TaskList task={doneList}>TO DO:</TaskList>
+                return <TaskList task={doneList}></TaskList>
               })
             }
           </div>

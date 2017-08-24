@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import Task from '../task/task';
 
 class TaskList extends Component {
   render() {
     return (
-      <div>
-        <Task>{this.props.task}</Task>
+      <div className='card task'>
+        <div className="card-block">
+          {this.props.task}
+        </div>
       </div>
     );
   }
