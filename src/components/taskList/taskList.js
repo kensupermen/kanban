@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import Task from '../task/task';
 
 class TaskList extends Component {
+
   render() {
     return (
-      <div className='card task'>
-        <div className="card-block">
-          {this.props.task}
-        </div>
+      <div>
+        { this.props.children }
+        <hr />
+        {
+          this.props.taskList.map(function(itemToDo, index) {
+            return <Task id={index} task={itemToDo}></Task>
+          })
+        }
       </div>
     );
   }
