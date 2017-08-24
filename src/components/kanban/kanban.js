@@ -4,8 +4,8 @@ import TaskList from '../taskList/taskList';
 class Kanban extends Component {
   state = {
     todos: ['a', 'b', 'c'],
-    inProgresses: ['d', 'e', 'f'],
-    dones: ['g', 'h', 'i', 'j']
+    inProgresses: [],
+    dones: []
   }
 
   add(e) {
@@ -22,7 +22,6 @@ class Kanban extends Component {
   allowDrop(e) {
     e.preventDefault();
   }
-
 
   drop(e) {
     e.preventDefault();

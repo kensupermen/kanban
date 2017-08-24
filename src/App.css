@@ -39,9 +39,24 @@
 
 .task {
   margin: 10px 0px 10px 0px;
-  padding: 15px;
+  padding: 10px;
   border: solid 3px green;
   border-radius: 5px;
+}
+
+.close {
+  float: right;
+  display: inline-block;
+  padding: 2px 5px;
+  /* background: #ccc; */
+}
+
+.close:hover {
+    float: right;
+    display: inline-block;
+    padding: 2px 5px;
+    /* background: #ccc; */
+    /* color: #fff; */
 }
 
 .task-list {
