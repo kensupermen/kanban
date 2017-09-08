@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import TaskList from '../taskList/taskList';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 class Kanban extends Component {
   state = {
     todos: ['a', 'b', 'c'],
-    inProgresses: [],
+    inProgresses: ['d', 'e', 'f'],
     dones: []
   }
 
@@ -19,15 +21,30 @@ class Kanban extends Component {
     }
   }
 
-  allowDrop(e) {
-    e.preventDefault();
+  removeItem(array1, array2){
+    array1.map((array1Item, array1Index) => {
+      array2.map((array2Item, array2Index) => {
+        if(array1Item === array2Item)
+          array2.splice(array2Index, 1)
+        return array2
+      });
+      return array1
+    });
   }
 
-  drop(e) {
-    e.preventDefault();
-    let tag = e.dataTransfer.getData('text');
-    e.target.appendChild(document.getElementById(tag));
-    console.log('dropping');
+  handleOnChange() {
+    let todoItems = this.state.todos;
+    let inProgressItems = this.state.inProgresses;
+    let doneItems = this.state.dones;
+
+    this.removeItem(doneItems, inProgressItems);
+    this.removeItem(inProgressItems, todoItems);
+
+    this.setState({
+      todos: todoItems,
+      inProgresses: inProgressItems,
+      dones: doneItems,
+    });
   }
 
   render() {
@@ -40,16 +57,16 @@ class Kanban extends Component {
           </div>
         </div>
         <div className='row kanban'>
-          <div id='todo' className='col-4' onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(this)}>
-            <TaskList taskList={this.state.todos}>TO DO:</TaskList>
+          <div id='todo' className='col-4'>
+            <TaskList taskList={this.state.todos} onChange={()=> this.handleOnChange()}>TO DO:</TaskList>
           </div>
 
-          <div id='inProgress' className='col-4' onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(this)}>
-            <TaskList taskList={this.state.inProgresses}>IN PROGRESS:</TaskList>
+          <div id='inProgress' className='col-4'>
+            <TaskList taskList={this.state.inProgresses} onChange={()=> this.handleOnChange()}>IN PROGRESS:</TaskList>
           </div>
 
           <div id='done' className='col-4'>
-            <TaskList taskList={this.state.dones}>DONE:</TaskList>
+            <TaskList taskList={this.state.dones} onChange={() => this.handleOnChange()}>DONE:</TaskList>
           </div>
         </div>
       </div>
@@ -57,4 +74,4 @@ class Kanban extends Component {
   }
 }
 
-export default Kanban;
+export default DragDropContext(HTML5Backend)(Kanban);

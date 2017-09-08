@@ -1,4 +1,27 @@
 import React, { Component } from 'react';
+import { DragSource } from 'react-dnd';
+
+const taskSource = {
+  beginDrag(props, monitor, component) {
+    return {
+      id: props.id,
+      name: props.task,
+      parent: props.children
+    };
+  }, 
+
+  endDrag(props, monitor, component) {
+    // console.log('end drag', props);
+    props.onChange();
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
 
 class Task extends Component {
 
@@ -10,17 +33,13 @@ class Task extends Component {
       // }
     // })
     // this.setState(this.state);
-  }
+  };
 
-  drag(e) {
-    e.dataTransfer.setData('text', e.target.id);
-    console.log('dragging');
-  }
 
   render() {
-    return (
-      <div id={this.props.id} className='task' draggable='true' 
-        onDragStart={this.drag.bind(this)}>
+    const { connectDragSource, isDragging } = this.props;
+    return connectDragSource(
+      <div id={this.props.id} className='task' style={{opacity: isDragging ? 0.5 : 1, cursor: 'move'}}>
         <button type='button' className='close' onClick={this.remove}>×</button>
         {this.props.task}
       </div>
@@ -28,4 +47,4 @@ class Task extends Component {
   }
 }
 
-export default Task;
+export default DragSource("Task1", taskSource, collect)(Task);
