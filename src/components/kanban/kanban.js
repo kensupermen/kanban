@@ -5,8 +5,8 @@ import HTML5Backend from 'react-dnd-html5-backend';
 
 class Kanban extends Component {
   state = {
-    todos: ['a', 'b', 'c'],
-    inProgresses: ['d', 'e', 'f'],
+    todos: ['learning react', 'learning ruby', 'learning golang'],
+    inProgresses: ['read clean code', 'read complete code'],
     dones: []
   }
 
@@ -15,7 +15,7 @@ class Kanban extends Component {
       let txtToDo = this.refs.txtToDo.value;
       if (txtToDo.length === 0)
         return
-      this.state.todo.push(txtToDo);
+      this.state.todos.push(txtToDo);
       this.setState(this.state);
       this.refs.txtToDo.value = '';
     }

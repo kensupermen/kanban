@@ -6,6 +6,19 @@ const dropField = {
   drop(props, monitor, component) {
     let taskList = props.taskList;
     taskList.push(monitor.getItem().name);
+  },
+
+  canDrop(props, monitor) {
+    if (props.children === monitor.getItem().parent){
+      return false
+    }
+    if (props.children === "DONE:" && monitor.getItem().parent === "TO DO:") {
+      return false
+    }
+    if (props.children === "TO DO:" && monitor.getItem().parent === "DONE:") {
+      return false
+    }
+    return true
   }
 
 };
