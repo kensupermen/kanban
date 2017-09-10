@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h3>Kanban App</h3>
+        <h3>Kanban</h3>
         <br />
         <Kanban></Kanban>
       </div>
